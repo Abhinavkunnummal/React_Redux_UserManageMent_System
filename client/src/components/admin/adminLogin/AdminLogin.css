@@ -1,0 +1,76 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: rgb(131, 214, 247);
+    height: 100vh;
+    margin: 0;
+}
+
+header {
+    background-color: white;
+    color: #fff;
+    padding: 2.4em;
+    text-align: center;
+}
+
+a {
+    text-decoration: none;
+    color: rgb(131, 214, 247);
+    margin-right: 1em;
+}
+
+.right-align {
+    text-align: right;
+    position: relative;
+    top: 2em;
+}
+
+.admin-heading {
+    color: black;
+    font-size: 28px;
+    margin-top: 10px;
+}
+
+.admin-form {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgb(131, 214, 247);
+    max-width: 400px;
+    width: 100%;
+    margin: 100px auto;
+}
+
+.admin-input-container input {
+    width: 80%;
+    padding: 10px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    color: rgb(131, 214, 247);
+    margin-top: 15px;
+}
+
+.admin-submit-button {
+    width: 80%;
+    border: 0;
+    outline: 0;
+    padding: 12px;
+    background: #0056b3;
+    color: white;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: 500;
+    margin-top: 20px;
+    cursor: pointer;
+}
+
+.admin-submit-button:hover {
+    background-color: rgb(2, 2, 68);
+}
+
+.admin-error-text {
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
+}
