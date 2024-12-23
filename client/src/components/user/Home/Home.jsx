@@ -7,12 +7,13 @@ import './Home.css';
 import { toast } from 'react-toastify';
 import profile from '../../../assets/profile.png';
 import API from '../../../../config/axiosConfig'
+import 'react-toastify/dist/ReactToastify.css';
 
 
 
 const Home = () => {
 
-    console.log('heli')
+    // console.log('heli')
 
     const [name, setName] = useState('')
     const [email, setEmail] = useState('');
@@ -33,7 +34,7 @@ const Home = () => {
                     }
                 })
                 if(response.data.success){
-                    console.log(response.data.user,'response data')
+                    // console.log(response.data.user,'response data')
                     setName(response.data.user.name)
                     setEmail(response.data.user.email)
                     setMobile(response.data.user.mobile)
@@ -70,7 +71,7 @@ const Home = () => {
 
         navigate('/edit-profile');
     };
-    console.log(profile_Url,'prfile')
+    // console.log(profile_Url,'prfile')
     return (
         <div className='parent-container'>
             <div className="dashboard-container">

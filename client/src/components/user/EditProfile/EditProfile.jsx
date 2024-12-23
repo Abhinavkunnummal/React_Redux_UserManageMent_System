@@ -23,7 +23,7 @@ const EditProfile = () => {
                     }
                 })
                 if(response.data.success){
-                    console.log('helo')
+                    // console.log('helo')
                     console.log(response.data.user,'user')
                     setName(response.data.user.name)
                     setMobile(response.data.user.mobile)
@@ -63,7 +63,7 @@ const EditProfile = () => {
         if(profilePic){
             formData.append('profilePic',profilePic)
         }
-        console.log(token,'token')
+        // console.log(token,'token')
         try {
             const response = await API.put('/edit-profile',formData,{
                 headers:{

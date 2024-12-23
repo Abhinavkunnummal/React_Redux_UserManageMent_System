@@ -6,16 +6,15 @@ import API from '../../../../config/axiosConfig';
 import { toast } from 'react-toastify';
 
 const EditUser = () => {
-
-    const {userId} = useParams()
+    const { userId } = useParams();
     const [profilePic, setProfilePic] = useState(profile);
-    const [email,setEmail] = useState('')
+    const [email, setEmail] = useState('');
     const [name, setName] = useState('');
     const [mobile, setMobile] = useState('');
 
     const navigate = useNavigate();
 
-      useEffect(() => {
+    useEffect(() => {
         const fetchUserDetails = async () => {
             const token = localStorage.getItem('adminToken');
             try {
@@ -24,20 +23,25 @@ const EditUser = () => {
                         Authorization: `Bearer ${token}`,
                     },
                 });
-                console.log(response.data)
+
                 if (response.data.success) {
                     setName(response.data.user.name);
                     setMobile(response.data.user.mobile);
-                    setEmail(response.data.user.email)
+                    setEmail(response.data.user.email);
+                    setProfilePic(response.data.user.profilePic || profile);
                 } else {
-                    // navigate('/admin/login');
+                    toast.error('Failed to fetch user details.');
+                    navigate('/admin/login');
                 }
             } catch (error) {
-                // navigate('/admin/login');
+                console.error('Error fetching user details:', error);
+                toast.error('Session expired. Please log in again.');
+                navigate('/admin/login');
             }
         };
+
         fetchUserDetails();
-    }, [navigate]);
+    }, [navigate, userId]);
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -49,35 +53,39 @@ const EditUser = () => {
     };
 
     const handleProfilePicChange = (event) => {
-        setProfilePic(event.target.files[0]);
+        if (event.target.files && event.target.files[0]) {
+            setProfilePic(event.target.files[0]);
+        }
     };
 
     const handleSaveChanges = async (e) => {
         e.preventDefault();
 
-        const token = localStorage.getItem('userToken');
+        const token = localStorage.getItem('adminToken');
         const formData = new FormData();
         formData.append('name', name);
         formData.append('mobile', mobile);
-        if (profilePic) {
+        if (profilePic instanceof File) {
             formData.append('profilePic', profilePic);
         }
 
         try {
-            const response = await API.put(`/admin/edituser/${userId}`,formData, {
+            const response = await API.put(`/admin/edituser/${userId}`, formData, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                     'Content-Type': 'multipart/form-data',
                 },
             });
+
             if (response.data.success) {
-                toast.success('Profile Updated');
+                toast.success('Profile updated successfully');
                 navigate('/admin/dashboard');
             } else {
                 toast.error('Failed to update profile');
             }
         } catch (error) {
-            console.log(error)
+            console.error('Error updating profile:', error);
+            toast.error('An error occurred while updating the profile');
         }
     };
 
@@ -86,7 +94,11 @@ const EditUser = () => {
             <div className="user-profile-section">
                 <div className="user-profile-info">
                     <p>Edit Profile</p>
-                    <img src={profilePic instanceof File ? URL.createObjectURL(profilePic) : profilePic} alt="Profile" className="user-profile-pic" />
+                    <img
+                        src={profilePic instanceof File ? URL.createObjectURL(profilePic) : profilePic}
+                        alt="Profile"
+                        className="user-profile-pic"
+                    />
                 </div>
                 <div className="user-form-section">
                     <label>
@@ -117,7 +129,7 @@ const EditUser = () => {
                         />
                     </label>
                     <input type="file" onChange={handleProfilePicChange} id="upload" hidden />
-                    <label className='user-upload-btn' htmlFor="upload">Upload</label>
+                    {/* <label className='user-upload-btn' htmlFor="upload">Upload</label> */}
                     <button onClick={handleSaveChanges} className="user-save-btn">Save Changes</button>
                 </div>
             </div>

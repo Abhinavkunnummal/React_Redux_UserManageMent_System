@@ -8,10 +8,9 @@ cloudinary.config({
     api_secret:process.env.CLOUDINARY_API_SECRET
 })
 
-console.log(process.env.CLOUDINARY_CLOUD_NAME)
+// console.log(process.env.CLOUDINARY_CLOUD_NAME)
 
 const uploadImage = (imageBuffering) =>{
-    console.log('hi')
     return new Promise((resolve,reject)=>{
         cloudinary.v2.uploader.upload_stream({folder:'profiles'},(error,result)=>{
             if(error){

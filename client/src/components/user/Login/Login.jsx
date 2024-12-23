@@ -49,7 +49,7 @@ const Login = () => {
           isLoggedIn : true
         }))
         toast.success("Login Successfull");
-        console.log('helo')
+        // console.log('helo')
         navigate('/');
       }
     } catch (error) {

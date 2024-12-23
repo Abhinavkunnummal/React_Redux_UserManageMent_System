@@ -9,7 +9,7 @@ dotenv.config();
 
 const verifyLogin = async(req,res) =>{
     try {
-        console.log('hii')
+     
         const adminEMAIL = process.env.ADMIN_EMAIL;
         const adminPASSWORD = process.env.ADMIN_PASSWORD;
 
@@ -75,9 +75,9 @@ const addUser = async(req,res) =>{
         // if(!name || !email || !mobile || !password ) {
         //     return res.status(400).json({success:false,message:'All fields are required'});
         // }
-        console.log(req.body,'dsfsdf')
+     
         const activeUser = await User.findOne({email});
-        console.log(activeUser,'activeuser')
+     
         if(activeUser){
             return res.status(200).json({success:true,message:'Email already exist'});
         }

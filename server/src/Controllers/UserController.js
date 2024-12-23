@@ -79,10 +79,10 @@ const verifyLogin = async (req, res) => {
 
 const getUserData = async (req, res) => {
     try {
-        console.log("1")
+
         const { payload } = req.user;
         const user = await User.findOne({ _id: payload });
-        console.log(user)
+
         if (user) {
             res.status(200).json({
                 success: true,
@@ -95,7 +95,7 @@ const getUserData = async (req, res) => {
                 }
             })
         } else {
-            console.log('no user')
+            
             res.status(404).json({
                 success: false,
                 message: 'User not found'
@@ -117,11 +117,11 @@ const editProfile = async(req,res) =>{
         const {payload} = req.user;
 
         let profile_Url;
-        console.log('start')
+        // console.log('start')
         if(req.file){
             profile_Url = await uploadImage(req.file.buffer)
         }
-        console.log('finish')
+        // console.log('finish')
         const updateUser = await User.findByIdAndUpdate(
             payload,
             {
@@ -132,7 +132,7 @@ const editProfile = async(req,res) =>{
             },
             {new:true}
         )
-        console.log('3')
+        // console.log('3')
         console.log(updateUser,'user')
         if(updateUser){
             res.status(200).json({

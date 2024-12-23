@@ -41,14 +41,14 @@ const SignUp = () => {
 
     setErrors({});
     
-    console.log(name, email, password, mobile, 'hello')
+    // console.log(name, email, password, mobile, 'hello')
     let formData = {name,email,password,mobile}
-    console.log(formData,'formdata')
+    // console.log(formData,'formdata')
 
     try {
       const response = await API.post('/signup',formData)
-      console.log(response.status,'status')
-      console.log(response.data.message,'status')
+      // console.log(response.status,'status')
+      // console.log(response.data.message,'status')
       if(response.data.message === 'Email already exist'){
         newErrors.email = 'Email already exist'
         setErrors(newErrors)
@@ -94,7 +94,7 @@ const SignUp = () => {
           {errors.email && <p className="error-text">{errors.email}</p>}
 
           <input
-            type="password"
+            type="number"
             id="confirmPassword"
             name="confirmPassword"
             placeholder="Enter your mobile number"
